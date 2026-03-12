@@ -1,6 +1,6 @@
 # Workspace Agent Instructions
 
-This workspace includes **30 specialized agents** (including 3 domain coordinators), **79 skills**, and domain knowledge for AI-powered software development.
+This workspace includes **33 specialized agents** (including 3 domain coordinators), **83 skills**, and domain knowledge for AI-powered software development.
 
 ## Core Principles
 
@@ -40,6 +40,9 @@ This workspace includes **30 specialized agents** (including 3 domain coordinato
 | **ai-coordinator** | **AI domain coordinator** | **Tasks spanning 2+ AI agents (ML + vision + LLM)** |
 | **backend-coordinator** | **Backend domain coordinator** | **Tasks spanning 2+ backend agents (API + auth + DB + perf)** |
 | **frontend-coordinator** | **Frontend domain coordinator** | **Tasks spanning 2+ frontend agents (components + a11y)** |
+| self-improver | System self-optimization | After multi-agent sessions, refines skills and routing |
+| eval-agent | Dispatch quality evaluation | Scores orchestration decisions, measures efficiency |
+| project-scanner | Codebase snapshot generation | First-time project setup, generates instant-load context |
 
 ## Agent Orchestration
 

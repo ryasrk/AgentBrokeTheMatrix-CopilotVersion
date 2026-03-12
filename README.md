@@ -1,6 +1,6 @@
 # AgentBrokeTheMatrix — Copilot Version
 
-A collection of **30 specialized agents** (including 3 domain coordinators) and **79 domain skills** for GitHub Copilot Chat in VS Code. Designed for AI-powered software development with maximum parallelism — a planner agent orchestrates sub-agents across AI/ML, Backend, Frontend, DevOps, and more.
+A collection of **33 specialized agents** (including 3 domain coordinators) and **83 domain skills** for GitHub Copilot Chat in VS Code. Designed for AI-powered software development with maximum parallelism — a planner agent orchestrates sub-agents across AI/ML, Backend, Frontend, DevOps, and more.
 
 ---
 
@@ -185,7 +185,7 @@ Phase 4: CLOSE OUT
 
 ---
 
-## All Agents (30)
+## All Agents (33)
 
 ### Domain Coordinators (context multipliers)
 
@@ -228,19 +228,23 @@ Each coordinator gets its own **full context window (~200K tokens)**, so dispatc
 | harness-optimizer | Agent Ops | Optimize agent harness configuration |
 | loop-operator | Agent Ops | Monitor autonomous agent loops |
 | tasksync | Interaction | Interactive feedback loop protocol |
+| self-improver | System Ops | Analyzes sessions, refines skills and routing rules |
+| eval-agent | System Ops | Scores dispatch quality, tracks orchestration metrics |
+| project-scanner | System Ops | Auto-generates project snapshot for instant context |
 
 ---
 
-## Skills (79)
+## Skills (83)
 
 Skills are domain knowledge files that agents load for context. Organized under `.github/skills/`:
 
 <details>
-<summary>View all 79 skills</summary>
+<summary>View all 83 skills</summary>
 
 | Skill | Domain |
 |-------|--------|
 | accessibility-patterns | Frontend |
+| agent-chains | Orchestration |
 | agent-harness-construction | Agent Ops |
 | agentic-engineering | Agent Ops |
 | ai-first-engineering | Agent Ops |
@@ -250,6 +254,7 @@ Skills are domain knowledge files that agents load for context. Organized under 
 | auth-patterns | Security |
 | autonomous-loops | Agent Ops |
 | backend-patterns | Backend |
+| benchmarking-dashboard | System Ops |
 | clickhouse-io | Database |
 | coding-standards | Standards |
 | computer-vision-patterns | AI/Vision |
@@ -261,6 +266,7 @@ Skills are domain knowledge files that agents load for context. Organized under 
 | continuous-learning | Agent Ops |
 | continuous-learning-v2 | Agent Ops |
 | cost-aware-llm-pipeline | AI/LLM |
+| cost-aware-model-routing | System Ops |
 | cpp-coding-standards | C++ |
 | cpp-testing | C++ |
 | database-migrations | Database |
@@ -420,6 +426,53 @@ Savings: ~80% per skill load
 Phase 1 results are cached in session memory so Phase 2 agents don't redo exploration work.
 
 See the `context-efficient-dispatch`, `memory-blackboard`, and `micro-skills-index` skills for full details.
+
+---
+
+## Advanced Features
+
+### Self-Improving System
+
+After each multi-agent session, the planner automatically dispatches:
+1. **`eval-agent`** — Scores routing accuracy, context efficiency, parallelism, and output quality (A-F grade)
+2. **`self-improver`** — Analyzes the eval report, identifies inefficiencies, updates skill files and micro-skills index
+
+Over time, the system learns which routing decisions work best and which skills need updating.
+
+### Pre-Built Agent Chains
+
+Common workflows are pre-defined in the `agent-chains` skill:
+
+| Chain | Trigger | Agents (in order) |
+|-------|---------|-------------------|
+| New API Endpoint | "add endpoint" | database-reviewer → api-designer → tdd-guide → code-reviewer → security-reviewer |
+| New React Component | "create component" | frontend-reviewer → tdd-guide → ui-ux-auditor → code-reviewer |
+| ML Pipeline | "train model" | cv-specialist → ai-ml-engineer → performance-optimizer → code-reviewer |
+| Full-Stack Feature | "full-stack" | architect → [backend-coordinator + ai-coordinator] → frontend-coordinator → reviews |
+| Bug Fix | "fix bug" | Explore → tdd-guide → code-reviewer → library-docs-checker |
+| Auth Implementation | "add auth" | auth-specialist → [database-reviewer + api-designer] → security-reviewer |
+
+The planner selects the matching chain and runs it automatically.
+
+### Cost-Aware Model Routing
+
+Not every agent needs the most expensive model:
+- **Opus** (complex reasoning): planner, architect, security-reviewer, coordinators, AI specialists
+- **Sonnet** (pattern matching): code-reviewer, tdd-guide, build-error-resolver, devops-engineer, scanners
+
+This reduces cost by ~40% with no quality loss for pattern-matching tasks.
+
+### Project Snapshots
+
+The `project-scanner` agent auto-generates a ~500-token project summary (tech stack, structure, key files, entry points). This loads instantly in every session, replacing 5-10 codebase exploration calls that waste ~5000 tokens.
+
+### Benchmarking Dashboard
+
+Persistent tracking of agent metrics across sessions:
+- Agent utilization (which agents are used vs unused)
+- Routing accuracy trends
+- Context efficiency improvements
+- Session scores over time
 
 ---
 

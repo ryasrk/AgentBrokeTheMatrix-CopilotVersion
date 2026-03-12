@@ -53,6 +53,7 @@ For tasks within a single domain, dispatch directly:
 | Accessibility / WCAG / design system | `ui-ux-auditor` |
 | CI/CD / Docker / monitoring / IaC | `devops-engineer` |
 | Library docs / version compat / deprecated APIs | `library-docs-checker` |
+| Project snapshot / codebase scanning | `project-scanner` |
 | Codebase exploration | `Explore` |
 | General implementation | (you do it directly or use `tdd-guide`) |
 
@@ -129,9 +130,11 @@ See `memory-blackboard` skill for the full protocol.
 
 ### Phase 4 — Close Out
 1. Final review wave: `code-reviewer` + `security-reviewer` on all changes.
-2. Summarise everything done, todos remaining, risks.
-3. `ask_user`: "All steps complete. Anything to adjust, or should we wrap up?"
-4. Only end when user says so.
+2. Dispatch `eval-agent` to score the session's orchestration quality.
+3. Dispatch `self-improver` to analyze results and update skills/micro-index.
+4. Summarise everything done, todos remaining, risks.
+5. `ask_user`: "All steps complete. Anything to adjust, or should we wrap up?"
+6. Only end when user says so.
 
 ---
 
@@ -182,6 +185,9 @@ Before planning, read relevant skill files to absorb domain conventions:
 | Context-efficient dispatch | `.github/skills/context-efficient-dispatch/SKILL.md` |
 | Memory blackboard protocol | `.github/skills/memory-blackboard/SKILL.md` |
 | Micro-skills index | `.github/skills/micro-skills-index/SKILL.md` |
+| Agent chains (pre-built workflows) | `.github/skills/agent-chains/SKILL.md` |
+| Cost-aware model routing | `.github/skills/cost-aware-model-routing/SKILL.md` |
+| Benchmarking dashboard | `.github/skills/benchmarking-dashboard/SKILL.md` |
 
 ---
 
