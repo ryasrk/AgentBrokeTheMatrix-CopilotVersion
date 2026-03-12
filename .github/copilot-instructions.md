@@ -1,6 +1,6 @@
 # Workspace Agent Instructions
 
-This workspace includes **23 specialized agents**, **76 skills**, and domain knowledge for AI-powered software development.
+This workspace includes **30 specialized agents** (including 3 domain coordinators), **79 skills**, and domain knowledge for AI-powered software development.
 
 ## Core Principles
 
@@ -37,10 +37,13 @@ This workspace includes **23 specialized agents**, **76 skills**, and domain kno
 | ui-ux-auditor | WCAG, accessibility, design systems | UI quality, a11y audit |
 | devops-engineer | CI/CD, Docker, monitoring, IaC | Deployment, infrastructure |
 | library-docs-checker | Library docs, version compat, deprecated APIs | Using external libraries, upgrading deps |
+| **ai-coordinator** | **AI domain coordinator** | **Tasks spanning 2+ AI agents (ML + vision + LLM)** |
+| **backend-coordinator** | **Backend domain coordinator** | **Tasks spanning 2+ backend agents (API + auth + DB + perf)** |
+| **frontend-coordinator** | **Frontend domain coordinator** | **Tasks spanning 2+ frontend agents (components + a11y)** |
 
 ## Agent Orchestration
 
-Use agents proactively without user prompt:
+### Direct Dispatch (single domain)
 - Complex feature requests → **planner**
 - Code just written/modified → **code-reviewer**
 - Bug fix or new feature → **tdd-guide**
@@ -56,6 +59,17 @@ Use agents proactively without user prompt:
 - Accessibility audit → **ui-ux-auditor**
 - Deployment/CI/CD → **devops-engineer**
 - Library syntax/version checks → **library-docs-checker**
+
+### Hierarchical Dispatch (multi-domain, context-efficient)
+- Multi-AI task (training + vision + LLM) → **ai-coordinator** → dispatches specialist agents
+- Multi-backend task (API + auth + DB) → **backend-coordinator** → dispatches specialist agents
+- Multi-frontend task (components + a11y + state) → **frontend-coordinator** → dispatches specialist agents
+- Full-stack feature → **ai-coordinator** + **backend-coordinator** + **frontend-coordinator** (parallel)
+
+### Context Optimization
+- Use **memory blackboard** (`/memories/session/`) for cross-agent context sharing
+- Use **context packets** (compressed summaries) instead of raw file contents
+- Use **micro-skills index** to load specific skill sections, not full files
 
 Use parallel execution for independent operations — launch multiple agents simultaneously.
 

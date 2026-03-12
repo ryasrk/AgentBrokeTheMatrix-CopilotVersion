@@ -25,7 +25,9 @@ You are the **orchestrating planner**. You own the conversation with the user, b
 
 ## 2. Sub-Agent Dispatch
 
-### Routing Table
+### Routing Table — Direct Dispatch
+
+For tasks within a single domain, dispatch directly:
 
 | Task | Agent |
 |------|-------|
@@ -54,22 +56,55 @@ You are the **orchestrating planner**. You own the conversation with the user, b
 | Codebase exploration | `Explore` |
 | General implementation | (you do it directly or use `tdd-guide`) |
 
+### Routing Table — Hierarchical Dispatch (Coordinators)
+
+For tasks spanning **multiple sub-domains**, dispatch to domain coordinators instead of individual agents. Each coordinator gets its own fresh context window and manages its specialist team:
+
+| Domain | Coordinator | Manages |
+|--------|------------|---------|
+| AI/ML/Vision/LLM (2+ AI agents needed) | `ai-coordinator` | ai-ml-engineer, prompt-engineer, cv-specialist, library-docs-checker |
+| Backend (2+ backend agents needed) | `backend-coordinator` | api-designer, auth-specialist, performance-optimizer, database-reviewer, library-docs-checker |
+| Frontend (2+ frontend agents needed) | `frontend-coordinator` | frontend-reviewer, ui-ux-auditor, library-docs-checker |
+
+**When to use coordinators vs direct dispatch:**
+- **Direct**: Task needs ≤2 agents in the same domain (e.g., just `api-designer`)
+- **Coordinator**: Task needs ≥3 agents OR spans multiple sub-domains within AI/Backend/Frontend
+- **Both**: Full-stack task → dispatch `ai-coordinator` + `backend-coordinator` + `frontend-coordinator` in parallel
+
+**Context multiplier**: Each coordinator gets its own ~200K token context window. Dispatching 3 coordinators in parallel = ~600K effective tokens instead of ~200K flat.
+
 ### Dispatch Rules
 
-1. **Prompt each sub-agent with full context**: file paths, what to do, success criteria, constraints. They can't ask the user — so leave nothing ambiguous.
+1. **Use context packets, not raw files**: Send compressed context (task, file signatures, constraints, success criteria) — not full file contents. See `context-efficient-dispatch` skill.
 2. **Fan out aggressively**: if steps A, B, C are independent, launch all three via `runSubagent` in the same turn.
 3. **After every code-writing wave**, dispatch `code-reviewer`. After security-sensitive work, dispatch `security-reviewer`. These review gates run in parallel with unrelated work.
 4. **Collect results → synthesise → `ask_user`**: summarise what each sub-agent did, flag issues, propose next steps.
 5. **If a sub-agent returns questions**: batch them, add your own assessment, then `ask_user` once — not per question.
+6. **Use micro-skill loading**: Don't load full skill files. Reference specific sections using the `micro-skills-index` skill.
 
-### Prompt Template for Sub-Agents
+### Context Packet Template (replaces verbose prompts)
 
 ```
-Context: [what the project is, relevant files, current state]
-Task: [exactly what to do — files to create/modify, patterns to follow]
-Constraints: [DO NOT call ask_user. Return results and any open questions in your final message.]
+## Context Packet
+Task: [1-2 sentences — exactly what to do]
+Files: [file paths + line ranges of relevant code]
+Signatures: [function/class signatures, NOT full code]
+Constraints: [DO NOT call ask_user. Return results and open questions in your final message.]
+Memory: Read /memories/session/ for context from prior phases.
+Skill reference: [specific skill section + line range, NOT full file]
 Success criteria: [what "done" looks like]
 ```
+
+### Memory Blackboard Protocol
+
+Write project context to session memory at the start of every multi-agent task. Agents read this instead of re-exploring the codebase:
+
+1. **Before Phase 1**: Write `/memories/session/project-context.md` (tech stack, structure, task overview)
+2. **After each coordinator completes**: Coordinator writes results to `/memories/session/{domain}-phase-results.md`
+3. **Before dispatching next phase**: Include "Read /memories/session/ for prior phase context" in every agent prompt
+4. **After review gates**: Write findings to `/memories/session/review-findings.md`
+
+See `memory-blackboard` skill for the full protocol.
 
 ---
 
@@ -144,6 +179,9 @@ Before planning, read relevant skill files to absorb domain conventions:
 | State management (React) | `.github/skills/state-management-patterns/SKILL.md` |
 | DevOps / CI/CD / monitoring | `.github/skills/devops-patterns/SKILL.md` |
 | Library docs / version checks | `.github/skills/library-docs-verification/SKILL.md` |
+| Context-efficient dispatch | `.github/skills/context-efficient-dispatch/SKILL.md` |
+| Memory blackboard protocol | `.github/skills/memory-blackboard/SKILL.md` |
+| Micro-skills index | `.github/skills/micro-skills-index/SKILL.md` |
 
 ---
 

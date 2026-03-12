@@ -1,6 +1,6 @@
 # AgentBrokeTheMatrix — Copilot Version
 
-A collection of **27 specialized agents** and **76 domain skills** for GitHub Copilot Chat in VS Code. Designed for AI-powered software development with maximum parallelism — a planner agent orchestrates sub-agents across AI/ML, Backend, Frontend, DevOps, and more.
+A collection of **30 specialized agents** (including 3 domain coordinators) and **79 domain skills** for GitHub Copilot Chat in VS Code. Designed for AI-powered software development with maximum parallelism — a planner agent orchestrates sub-agents across AI/ML, Backend, Frontend, DevOps, and more.
 
 ---
 
@@ -185,7 +185,19 @@ Phase 4: CLOSE OUT
 
 ---
 
-## All Agents (27)
+## All Agents (30)
+
+### Domain Coordinators (context multipliers)
+
+| Agent | Manages | When to Use |
+|-------|---------|-------------|
+| ai-coordinator | ai-ml-engineer, prompt-engineer, cv-specialist | Tasks spanning 2+ AI sub-domains |
+| backend-coordinator | api-designer, auth-specialist, performance-optimizer, database-reviewer | Tasks spanning 2+ backend sub-domains |
+| frontend-coordinator | frontend-reviewer, ui-ux-auditor | Tasks spanning 2+ frontend sub-domains |
+
+Each coordinator gets its own **full context window (~200K tokens)**, so dispatching 3 coordinators in parallel gives you ~600K effective tokens.
+
+### Specialist Agents
 
 | Agent | Domain | Purpose |
 |-------|--------|---------|
@@ -219,12 +231,12 @@ Phase 4: CLOSE OUT
 
 ---
 
-## Skills (76)
+## Skills (79)
 
 Skills are domain knowledge files that agents load for context. Organized under `.github/skills/`:
 
 <details>
-<summary>View all 76 skills</summary>
+<summary>View all 79 skills</summary>
 
 | Skill | Domain |
 |-------|--------|
@@ -244,6 +256,7 @@ Skills are domain knowledge files that agents load for context. Organized under 
 | configure-ecc | Tooling |
 | content-engine | Content |
 | content-hash-cache-pattern | Backend |
+| context-efficient-dispatch | Agent Ops |
 | continuous-agent-loop | Agent Ops |
 | continuous-learning | Agent Ops |
 | continuous-learning-v2 | Agent Ops |
@@ -275,6 +288,8 @@ Skills are domain knowledge files that agents load for context. Organized under 
 | library-docs-verification | Research |
 | liquid-glass-design | iOS |
 | market-research | Business |
+| memory-blackboard | Agent Ops |
+| micro-skills-index | Agent Ops |
 | nanoclaw-repl | Tooling |
 | nutrient-document-processing | Tooling |
 | performance-optimization | Backend |
@@ -348,6 +363,63 @@ Skills are domain knowledge files that agents load for context. Organized under 
 ```
 
 The planner is the **only agent that talks to you**. Sub-agents report back to the planner, which synthesizes results and asks for your feedback. This means you get a single, coherent conversation — not 5 agents talking over each other.
+
+---
+
+## Context Optimization Strategies
+
+These built-in strategies maximize agent power within limited context windows:
+
+### 1. Hierarchical Dispatch (Context Multiplier)
+
+```
+❌ Flat dispatch (1 context window):
+Planner → [agent1, agent2, agent3, agent4, agent5, agent6]
+           ↑ all compete for ~200K tokens
+
+✅ Hierarchical dispatch (3 context windows):
+Planner → ai-coordinator → [ai-ml-engineer, cv-specialist]     ← 200K
+        → backend-coordinator → [api-designer, auth-specialist] ← 200K
+        → frontend-coordinator → [frontend-reviewer, ui-ux-auditor] ← 200K
+                                                        Total: ~600K effective
+```
+
+### 2. Memory Blackboard (Cross-Agent Context Sharing)
+
+Agents write findings to `/memories/session/`, later agents read instead of re-exploring:
+
+```
+Agent A explores codebase → writes to memory (5K tokens)
+Agent B reads memory → saves 4.8K tokens of redundant exploration
+Agent C reads memory → saves 4.8K tokens of redundant exploration
+Net savings: ~65% per subsequent agent
+```
+
+### 3. Context Packets (10x Compression)
+
+Instead of sending raw files to sub-agents, the planner sends compressed summaries:
+
+```
+Raw file: ~3000 tokens
+Context packet (signatures + task + constraints): ~300 tokens
+Compression: 10x with zero information loss for the task
+```
+
+### 4. Micro-Skills Loading
+
+Load only the specific section of a skill file needed for the task:
+
+```
+Full skill load: 1500-2500 tokens
+Micro-load (1 section): 200-400 tokens
+Savings: ~80% per skill load
+```
+
+### 5. Result Caching Between Phases
+
+Phase 1 results are cached in session memory so Phase 2 agents don't redo exploration work.
+
+See the `context-efficient-dispatch`, `memory-blackboard`, and `micro-skills-index` skills for full details.
 
 ---
 
