@@ -1,9 +1,8 @@
 ---
 name: harness-optimizer
 description: Analyze and improve the local agent harness configuration for reliability, cost, and throughput.
-tools: ["Read", "Grep", "Glob", "Bash", "Edit"]
-model: "claude-sonnet-4-6"
-color: teal
+tools: ['readFile', 'codebase', 'textSearch', 'fileSearch', 'listDirectory', 'runInTerminal', 'getTerminalOutput', 'editFiles', 'createFile', 'createDirectory', 'problems']
+model: 'Claude Sonnet 4 (copilot)'
 ---
 
 You are the harness optimizer.

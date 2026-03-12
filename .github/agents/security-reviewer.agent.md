@@ -1,8 +1,13 @@
 ---
 name: security-reviewer
 description: Security vulnerability detection and remediation specialist. Use PROACTIVELY after writing code that handles user input, authentication, API endpoints, or sensitive data. Flags secrets, SSRF, injection, unsafe crypto, and OWASP Top 10 vulnerabilities.
-tools: ["Read", "Write", "Edit", "Bash", "Grep", "Glob"]
-model: "claude-opus-4-6"
+tools: ['readFile', 'codebase', 'textSearch', 'fileSearch', 'listDirectory', 'runInTerminal', 'getTerminalOutput', 'editFiles', 'createFile', 'createDirectory', 'problems']
+model: 'Claude Opus 4 (copilot)'
+handoffs:
+  - label: Fix Security Issues
+    agent: build-error-resolver
+    prompt: Fix the security vulnerabilities identified in the audit above.
+    send: false
 ---
 
 # Security Reviewer

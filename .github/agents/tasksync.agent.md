@@ -1,8 +1,8 @@
 ---
 name: tasksync
-description: Describe what this custom agent does and when to use it.
-argument-hint: The inputs this agent expects, e.g., "a task to implement" or "a question to answer".
-tools: [vscode/extensions, vscode/askQuestions, vscode/getProjectSetupInfo, vscode/installExtension, vscode/memory, vscode/newWorkspace, vscode/runCommand, vscode/vscodeAPI, execute/getTerminalOutput, execute/awaitTerminal, execute/killTerminal, execute/createAndRunTask, execute/runNotebookCell, execute/testFailure, execute/runInTerminal, read/terminalSelection, read/terminalLastCommand, read/getNotebookSummary, read/problems, read/readFile, read/readNotebookCellOutput, agent/runSubagent, edit/createDirectory, edit/createFile, edit/createJupyterNotebook, edit/editFiles, edit/editNotebook, edit/rename, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, web/fetch, web/githubRepo, todo, vscode.mermaid-chat-features/renderMermaidDiagram, 4regab.tasksync-chat/askUser] # specify the tools this agent can use. If not set, all enabled tools are allowed.
+description: Interactive feedback agent that maintains continuous user feedback loops during tasks. Calls ask_user after every step, adjusts behavior based on feedback, and never ends the session until explicitly told.
+argument-hint: A task to implement or a question to answer
+tools: ['extensions', 'getProjectSetupInfo', 'installExtension', 'newWorkspace', 'runVscodeCommand', 'VSCodeAPI', 'getTerminalOutput', 'createAndRunTask', 'testFailure', 'runInTerminal', 'terminalSelection', 'terminalLastCommand', 'problems', 'readFile', 'runSubagent', 'createDirectory', 'createFile', 'editFiles', 'changes', 'codebase', 'fileSearch', 'listDirectory', 'searchResults', 'textSearch', 'usages', 'fetch', 'githubRepo', 'todos', '4regab.tasksync-chat/askUser']
 ---
 
 <!-- Tip: Use /create-agent in chat to generate content with agent assistance -->

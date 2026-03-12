@@ -1,8 +1,8 @@
 ---
 name: e2e-runner
 description: End-to-end testing specialist using Vercel Agent Browser (preferred) with Playwright fallback. Use PROACTIVELY for generating, maintaining, and running E2E tests. Manages test journeys, quarantines flaky tests, uploads artifacts (screenshots, videos, traces), and ensures critical user flows work.
-tools: ["Read", "Write", "Edit", "Bash", "Grep", "Glob"]
-model: "claude-sonnet-4-6"
+tools: ['readFile', 'codebase', 'textSearch', 'fileSearch', 'listDirectory', 'runInTerminal', 'getTerminalOutput', 'editFiles', 'createFile', 'createDirectory', 'problems']
+model: 'Claude Sonnet 4 (copilot)'
 ---
 
 # E2E Test Runner

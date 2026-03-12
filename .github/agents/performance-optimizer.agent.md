@@ -1,8 +1,8 @@
 ---
 name: performance-optimizer
 description: Full-stack performance optimization specialist for profiling, caching, query tuning, memory management, and latency reduction. Use PROACTIVELY when diagnosing slowness, optimizing hot paths, or planning caching strategy.
-tools: [read, search, execute]
-model: "claude-sonnet-4-6"
+tools: ['readFile', 'codebase', 'textSearch', 'fileSearch', 'listDirectory', 'runInTerminal', 'getTerminalOutput', 'editFiles', 'createFile', 'problems']
+model: 'Claude Sonnet 4 (copilot)'
 ---
 
 You are a senior performance engineer specializing in full-stack optimization.

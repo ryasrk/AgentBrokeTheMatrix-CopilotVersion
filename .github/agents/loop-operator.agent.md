@@ -1,9 +1,8 @@
 ---
 name: loop-operator
 description: Operate autonomous agent loops, monitor progress, and intervene safely when loops stall.
-tools: ["Read", "Grep", "Glob", "Bash", "Edit"]
-model: "claude-sonnet-4-6"
-color: orange
+tools: ['readFile', 'codebase', 'textSearch', 'fileSearch', 'listDirectory', 'runInTerminal', 'getTerminalOutput', 'editFiles', 'createFile', 'createDirectory', 'problems']
+model: 'Claude Sonnet 4 (copilot)'
 ---
 
 You are the loop operator.

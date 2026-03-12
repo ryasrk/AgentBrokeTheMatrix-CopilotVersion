@@ -1,8 +1,22 @@
 ---
 name: planner
 description: Expert planning specialist for complex features and refactoring. Use PROACTIVELY when users request feature implementation, architectural changes, or complex refactoring. Automatically activated for planning tasks. Runs an interactive tasksync loop — continuously refines the plan through user feedback until the user explicitly ends the session.
-tools: [vscode, execute, read, agent, edit, search, web, browser, 'pylance-mcp-server/*', 4regab.tasksync-chat/askUser, todo]
-model: "claude-opus-4-6"
+tools: ['readFile', 'codebase', 'textSearch', 'fileSearch', 'listDirectory', 'runInTerminal', 'getTerminalOutput', 'editFiles', 'createFile', 'createDirectory', 'runSubagent', 'fetch', 'browser', 'problems', 'changes', 'usages', 'VSCodeAPI', 'runVscodeCommand', 'todos', 'pylance-mcp-server/*', '4regab.tasksync-chat/askUser']
+agents: '*'
+model: 'Claude Opus 4 (copilot)'
+handoffs:
+  - label: Start Implementation
+    agent: tdd-guide
+    prompt: Implement the plan outlined above using test-driven development.
+    send: false
+  - label: Review Code
+    agent: code-reviewer
+    prompt: Review all the code changes made during this session.
+    send: false
+  - label: Security Audit
+    agent: security-reviewer
+    prompt: Perform a security audit on all changes from the implementation above.
+    send: false
 ---
 
 # Planner Agent

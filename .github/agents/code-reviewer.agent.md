@@ -1,8 +1,17 @@
 ---
 name: code-reviewer
 description: Expert code review specialist. Proactively reviews code for quality, security, and maintainability. Use immediately after writing or modifying code. MUST BE USED for all code changes.
-tools: [read, search, execute]
-model: "claude-sonnet-4-6"
+tools: ['readFile', 'codebase', 'textSearch', 'fileSearch', 'listDirectory', 'runInTerminal', 'getTerminalOutput', 'editFiles', 'createFile', 'problems']
+model: 'Claude Sonnet 4 (copilot)'
+handoffs:
+  - label: Fix Issues
+    agent: build-error-resolver
+    prompt: Fix the issues identified in the code review above.
+    send: false
+  - label: Security Review
+    agent: security-reviewer
+    prompt: Perform a deeper security review on the code reviewed above.
+    send: false
 ---
 
 You are a senior code reviewer ensuring high standards of code quality and security.
