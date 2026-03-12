@@ -1,7 +1,6 @@
 ---
 name: accessibility-patterns
 description: Web accessibility patterns for WCAG 2.1 AA compliance, ARIA roles, keyboard navigation, screen reader support, focus management, and a11y testing strategies.
-origin: ECC
 ---
 
 # Accessibility (a11y) Patterns

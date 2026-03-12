@@ -1,7 +1,6 @@
 ---
 name: library-docs-verification
 description: Patterns for verifying library documentation, checking version compatibility, detecting deprecated APIs, and keeping dependencies up to date across Python, Node.js, Go, and Rust projects.
-origin: ECC
 ---
 
 # Library Documentation Verification

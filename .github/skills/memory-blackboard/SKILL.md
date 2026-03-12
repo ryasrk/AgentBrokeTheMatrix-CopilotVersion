@@ -1,7 +1,6 @@
 ---
 name: memory-blackboard
 description: Shared memory protocol for multi-agent workflows — session memory as a blackboard for inter-agent communication, result caching, and progressive context building.
-origin: AgentBrokeTheMatrix
 ---
 
 # Memory Blackboard Pattern

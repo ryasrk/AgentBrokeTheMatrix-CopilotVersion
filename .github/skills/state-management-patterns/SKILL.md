@@ -1,7 +1,6 @@
 ---
 name: state-management-patterns
 description: Frontend state management patterns for React using useState, useReducer, Context, Zustand, Redux Toolkit, Jotai, and signals. Covers local vs global state, server state, and derived state.
-origin: ECC
 ---
 
 # State Management Patterns

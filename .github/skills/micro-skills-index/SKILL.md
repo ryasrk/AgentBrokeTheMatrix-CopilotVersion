@@ -1,7 +1,6 @@
 ---
 name: micro-skills-index
 description: Strategy for loading minimal, task-specific sections from large skill files instead of full files — reducing context consumption by 70-90%.
-origin: AgentBrokeTheMatrix
 ---
 
 # Micro-Skills Index

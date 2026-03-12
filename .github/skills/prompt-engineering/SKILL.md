@@ -1,7 +1,6 @@
 ---
 name: prompt-engineering
 description: Prompt design, LLM integration, RAG pipelines, embeddings, tool calling, and cost optimization for building AI-powered features with OpenAI, Anthropic, and local models.
-origin: ECC
 ---
 
 # Prompt Engineering & LLM Integration

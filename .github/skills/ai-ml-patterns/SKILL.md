@@ -1,7 +1,6 @@
 ---
 name: ai-ml-patterns
 description: Machine learning lifecycle patterns, model training, inference optimization, data pipelines, experiment tracking, and MLOps best practices for PyTorch, Ultralytics, scikit-learn, and TensorFlow.
-origin: ECC
 ---
 
 # AI/ML Development Patterns

@@ -1,7 +1,6 @@
 ---
 name: computer-vision-patterns
 description: Computer vision patterns for object detection (YOLO), image processing (OpenCV), OCR, video analysis, model export, and edge deployment.
-origin: ECC
 ---
 
 # Computer Vision Development Patterns

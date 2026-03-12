@@ -1,7 +1,6 @@
 ---
 name: devops-patterns
 description: DevOps patterns for CI/CD pipelines (GitHub Actions, GitLab CI), Docker containerization, monitoring, observability, infrastructure-as-code, and production deployment strategies.
-origin: ECC
 ---
 
 # DevOps & Infrastructure Patterns

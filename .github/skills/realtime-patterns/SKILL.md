@@ -1,7 +1,6 @@
 ---
 name: realtime-patterns
 description: Real-time communication patterns for WebSocket, Server-Sent Events (SSE), pub/sub, message queues, and event-driven architectures across Python, Node.js, and Go.
-origin: ECC
 ---
 
 # Real-Time Communication Patterns

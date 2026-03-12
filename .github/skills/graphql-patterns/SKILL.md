@@ -1,7 +1,6 @@
 ---
 name: graphql-patterns
 description: GraphQL API design patterns including schema design, resolvers, DataLoader batching, caching, subscriptions, and security for Apollo Server, Strawberry, and Ariadne.
-origin: ECC
 ---
 
 # GraphQL Development Patterns

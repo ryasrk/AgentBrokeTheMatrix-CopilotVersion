@@ -1,7 +1,6 @@
 ---
 name: auth-patterns
 description: Authentication and authorization patterns for JWT, OAuth2, RBAC, session management, API keys, and SSO across Python, Node.js, and Go backends.
-origin: ECC
 ---
 
 # Authentication & Authorization Patterns

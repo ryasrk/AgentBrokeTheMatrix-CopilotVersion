@@ -1,7 +1,6 @@
 ---
 name: performance-optimization
 description: Full-stack performance optimization patterns for profiling, caching, database tuning, memory management, and frontend performance across Python, Node.js, and web applications.
-origin: ECC
 ---
 
 # Performance Optimization Patterns

@@ -1,7 +1,6 @@
 ---
 name: context-efficient-dispatch
 description: Patterns for maximizing agent effectiveness within limited context windows — context compression, focused prompts, result caching, and hierarchical dispatch.
-origin: AgentBrokeTheMatrix
 ---
 
 # Context-Efficient Agent Dispatch
